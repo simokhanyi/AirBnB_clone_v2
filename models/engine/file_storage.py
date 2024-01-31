@@ -1,46 +1,43 @@
 #!/usr/bin/python3
 """This module defines a class to manage file storage for hbnb clone"""
 import json
-from importlib import import_module
-import os
+import shlex
 
 
 class FileStorage:
     """This class manages storage of hbnb models in JSON format"""
-    __file_path = 'file.json'
+
+    __file_path = "file.json"
     __objects = {}
 
-    def __init__(self):
-        """Initializes a FileStorage instance"""
-        self.model_classes = {
-            'BaseModel': import_module('models.base_model').BaseModel,
-            'User': import_module('models.user').User,
-            'State': import_module('models.state').State,
-            'City': import_module('models.city').City,
-            'Amenity': import_module('models.amenity').Amenity,
-            'Place': import_module('models.place').Place,
-            'Review': import_module('models.review').Review
-        }
-
     def all(self, cls=None):
-        """Returns a dictionary of models currently in storage"""
-        if cls is None:
-            return FileStorage.__objects
+        """
+        Returns a dictionary of models currently in storage
+
+        Args:
+            - cls (class, optional): the class to fetch from @__objects
+        """
+        dicts = {}
+        if cls:
+            dictionary = self.__objects
+            for key in dictionary:
+                partition = key.replace('.', ' ')
+                partition = shlex.split(partition)
+                if (partition[0] == cls.__name__):
+                    dicts[key] = self.__objects[key]
+            return (dicts)
         else:
-            filtered_objects = {}
-            for key, value in FileStorage.__objects.items():
-                if isinstance(value, cls):
-                    filtered_objects[key] = value
-            return filtered_objects
+            return self.__objects
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
-        key = "{}.{}".format(obj.__class__.__name__, obj.id)
-        FileStorage.__objects[key] = obj
+        self.all().update(
+            {obj.to_dict()["__class__"] + "." + obj.id: obj}
+        )
 
     def save(self):
         """Saves storage dictionary to file"""
-        with open(FileStorage.__file_path, 'w') as f:
+        with open(FileStorage.__file_path, "w") as f:
             temp = {}
             temp.update(FileStorage.__objects)
             for key, val in temp.items():
@@ -49,16 +46,46 @@ class FileStorage:
 
     def reload(self):
         """Loads storage dictionary from file"""
-        classes = self.model_classes
-        if os.path.isfile(self.__file_path):
+        from models.base_model import BaseModel
+        from models.user import User
+        from models.place import Place
+        from models.state import State
+        from models.city import City
+        from models.amenity import Amenity
+        from models.review import Review
+
+        classes = {
+            "BaseModel": BaseModel,
+            "User": User,
+            "Place": Place,
+            "State": State,
+            "City": City,
+            "Amenity": Amenity,
+            "Review": Review,
+        }
+        try:
             temp = {}
-            with open(self.__file_path, 'r') as file:
-                temp = json.load(file)
+            with open(FileStorage.__file_path, "r") as f:
+                temp = json.load(f)
                 for key, val in temp.items():
-                    self.all()[key] = classes[val['__class__']](**val)
-    
+                    self.all()[key] = classes[val["__class__"]](**val)
+        except FileNotFoundError:
+            pass
+
     def delete(self, obj=None):
-        """Deletes obj from __objects if it's inside"""
-        if obj is not None:
-            key = "{}.{}".format(obj.__class__.__name__, obj.id)
-            FileStorage.__objects.pop(key, None)
+        """
+        Delete obj from @__objects if its inside
+
+        Args:
+            - obj (object, optional): the object to delete from @__objects
+        """
+        if obj:
+            try:
+                key = "{}.{}".format(type(obj).__name__, obj.id)
+                del self.__objects[key]
+            except (KeyError, AttributeError):
+                pass
+
+    def close(self):
+        """Call the reload method."""
+        self.reload()
