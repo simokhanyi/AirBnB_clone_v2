@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 # sets up your web servers for the deployment of web_static
 # Nginx server configuration
 SERVER_CONFIG="server {
@@ -43,10 +44,6 @@ HOME_PAGE="<!DOCTYPE html>
 "
 
 # Check if Nginx is installed; if not, install it
-if ! command -v nginx &> /dev/null; then
-    apt-get update
-    apt-get -y install nginx
-fi
 
 # Create directories for web server content
 mkdir -p /var/www/html /var/www/error
