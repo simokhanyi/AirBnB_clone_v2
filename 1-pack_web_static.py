@@ -29,6 +29,3 @@ def do_pack():
     except FileNotFoundError:
         print("Error: Unable to find specified directory.")
         return None
-    except OSError as e:
-        print("Error:", e)
-        return None
