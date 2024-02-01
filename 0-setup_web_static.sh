@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-
 # sets up your web servers for the deployment of web_static
+
 # Nginx server configuration
 SERVER_CONFIG="server {
     listen 80 default_server;
@@ -22,7 +22,7 @@ SERVER_CONFIG="server {
     }
 
     if (\$request_filename ~ redirect_me) {
-        rewrite ^ https://github.com/Pronothurah permanent;
+        rewrite ^ https://sketchfab.com/bluepeno/models permanent;
     }
 
     location = /404.html {
@@ -44,6 +44,10 @@ HOME_PAGE="<!DOCTYPE html>
 "
 
 # Check if Nginx is installed; if not, install it
+if ! command -v nginx &> /dev/null; then
+    apt-get update
+    apt-get -y install nginx
+fi
 
 # Create directories for web server content
 mkdir -p /var/www/html /var/www/error
