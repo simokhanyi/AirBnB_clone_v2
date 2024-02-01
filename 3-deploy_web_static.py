@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """
-Creates and distributes an archive to your web
-servers, using the function deploy
+Distributes an archive to your web servers,
+using the function do_deploy
 """
 import os
 from datetime import datetime
@@ -65,3 +65,13 @@ def do_deploy(archive_path):
         return True
     except Exception:
         return False
+
+
+def deploy():
+    """
+    Full deployment based on do_pack & do_deploy (task 2)
+    """
+    path = do_pack()
+    if path is None:
+        return False
+    return do_deploy(path)
