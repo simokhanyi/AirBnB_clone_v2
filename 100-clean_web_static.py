@@ -18,8 +18,9 @@ def do_clean(number=0):
             return False
 
         # Delete unnecessary archives in the versions folder
-        local("ls -t versions | tail -n +{} | xargs -I {{}} rm versions/{{}}".
-                format(number + 1))
+        local("ls -t versions | "
+              "tail -n +{} | "
+              "xargs -I {{}} rm versions/{{}}".format(number + 1))
 
         # Delete unnecessary archives in /data/web_static/releases on each web
         run("ls -t /data/web_static/releases | tail -n +{} | xargs -I {{}} "
