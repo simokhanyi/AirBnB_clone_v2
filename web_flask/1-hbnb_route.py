@@ -8,7 +8,7 @@ app = Flask(__name__)
 def hello():
     """
     Route handler for the root URL ("/").
-    
+
     Returns:
         str: A greeting message.
     """
@@ -19,11 +19,12 @@ def hello():
 def hbnb():
     """
     Route handler for the "/hbnb" URL.
-    
+
     Returns:
         str: The string "HBNB".
     """
     return 'HBNB'
+
 
 if __name__ == '__main__':
     # Run the Flask app on 0.0.0.0:5000

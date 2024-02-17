@@ -4,12 +4,13 @@ from werkzeug.utils import escape
 
 app = Flask(__name__)
 
+
 # Route to display "Hello HBNB!"
 @app.route('/', strict_slashes=False)
 def hello():
     """
     Route handler for the root URL ("/").
-    
+
     Returns:
         str: A greeting message.
     """
@@ -20,7 +21,7 @@ def hello():
 def hbnb():
     """
     Route handler for the "/hbnb" URL.
-    
+
     Returns:
         str: The string "HBNB".
     """
@@ -31,10 +32,10 @@ def hbnb():
 def c_text(text):
     """
     Route handler for the "/c/<text>" URL.
-    
+
     Args:
         text (str): The text provided in the URL.
-    
+
     Returns:
         str: The string "C " followed by the value of the text variable.
     """
@@ -46,14 +47,15 @@ def c_text(text):
 def python_text(text):
     """
     Route handler for the "/python/<text>" URL.
-    
+
     Args:
-        text (str, optional): The text provided in the URL. Defaults to 'is cool'.
-    
+        text (str, optional):  Text provided in the URL. Defaults to 'is cool'.
+
     Returns:
         str: The string "Python " followed by the value of the text variable.
     """
     return 'Python ' + escape(text.replace('_', ' '))
+
 
 if __name__ == '__main__':
     # Run the Flask app on 0.0.0.0:5000
