@@ -5,6 +5,7 @@ from flask import Flask
 
 app = Flask(__name__)
 
+
 # Route to display "Hello HBNB!"
 @app.route('/', strict_slashes=False)
 def hello():
