@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HBNB - Filters</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/3-header.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/4-common.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/6-filters.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/8-places.css') }}">
+</head>
+<body>
+    <header class="header" id="header">
+        <nav>
+            <div class="container">
+                <div class="logo">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Holberton BnB logo">
+                </div>
+                <div class="hbnb_title">
+                    <h1>Holberton BnB</h1>
+                </div>
+                <div class="user">
+                    <span class="user_name">User Name</span>
+                    <a href="#" class="user_profile">Profile</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="filters">
+        <h3 class="titles">States</h3>
+        <div class="popover">
+            {% for state in states %}
+                <div class="popover-item">
+                    <input type="checkbox" name="state" id="{{ state.id }}">
+                    <label for="{{ state.id }}">{{ state.name }}</label>
+                </div>
+            {% endfor %}
+        </div>
+
+        <h3 class="titles">Amenities</h3>
+        <div class="popover">
+            {% for amenity in amenities %}
+                <div class="popover-item">
+                    <input type="checkbox" name="amenity" id="{{ amenity.id }}">
+                    <label for="{{ amenity.id }}">{{ amenity.name }}</label>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="places">
+        {% for place in places %}
+            <div class="place-card">
+                <div class="place-image">
+                    <img src="{{ place.url }}" alt="Placeholder image">
+                </div>
+                <div class="place-name">
+                    <h2>{{ place.name }}</h2>
+                </div>
+                <div class="place-price">
+                    <h3>{{ place.price }}</h3>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="footer_content">
+                &copy; 2024 Holberton School. All rights reserved.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
