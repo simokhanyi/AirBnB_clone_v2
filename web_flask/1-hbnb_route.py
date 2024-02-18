@@ -6,23 +6,13 @@ app = Flask(__name__)
 # Route to display "Hello HBNB!"
 @app.route('/', strict_slashes=False)
 def hello():
-    """
-    Route handler for the root URL ("/").
-
-    Returns:
-        str: A greeting message.
-    """
+    """ returns HELLO HBNB"""
     return 'Hello HBNB!'
 
 # Route to display "HBNB"
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
-    """
-    Route handler for the "/hbnb" URL.
-
-    Returns:
-        str: The string "HBNB".
-    """
+    """ returns HBNB"""
     return 'HBNB'
 
 
