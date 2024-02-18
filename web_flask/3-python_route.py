@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+""" Add third view func that redirects and has default val for variable """
+
 from flask import Flask
 from werkzeug.utils import escape
 
