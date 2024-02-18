@@ -7,7 +7,6 @@ from werkzeug.utils import escape
 app = Flask(__name__)
 
 
-# Route to display "Hello HBNB!"
 @app.route('/', strict_slashes=False)
 def hello():
     """
@@ -18,7 +17,7 @@ def hello():
     """
     return 'Hello HBNB!'
 
-# Route to display "HBNB"
+
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
     """
@@ -29,7 +28,7 @@ def hbnb():
     """
     return 'HBNB'
 
-# Route to display "C ", followed by the value of the text variable
+
 @app.route('/c/<text>', strict_slashes=False)
 def c_text(text):
     """
@@ -43,7 +42,7 @@ def c_text(text):
     """
     return 'C ' + escape(text.replace('_', ' '))
 
-# Route to display "Python ", followed by the value of the text variable
+
 @app.route('/python/', defaults={'text': 'is cool'}, strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
 def python_text(text):
