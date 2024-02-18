@@ -3,16 +3,16 @@
 
 from flask import Flask
 
+
 app = Flask(__name__)
 
 
-# Route to display "Hello HBNB!"
 @app.route('/', strict_slashes=False)
 def hello():
     """ returns HELLO HBNB"""
     return 'Hello HBNB!'
 
-# Route to display "HBNB"
+
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
     """ returns HBNB"""
