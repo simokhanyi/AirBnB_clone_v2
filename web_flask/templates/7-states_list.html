@@ -3,13 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <title>HBNB</title>
+    <style>
+        .state-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .state-item {
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
     <h1>States</h1>
-    <ul>
+    <div class="state-list">
         {% for state in states %}
-            <li>{{ state.id }}: <b>{{ state.name }}</b></li>
+            <div class="state-item">{{ state.id }}: <b>{{ state.name }}</b></div>
         {% endfor %}
-    </ul>
+    </div>
 </body>
 </html>
