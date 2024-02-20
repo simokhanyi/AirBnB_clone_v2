@@ -39,12 +39,13 @@ class DBStorage:
         """get all objects"""
         my_dict = {}
         if cls:
-            if type(cls) is str:
+            if isinstance(cls, str):
                 cls = eval(cls)
-            query = self.__session.query(cls)
-            for q in query:
-                key = "{}.{}".format(type(q).__name__, q.id)
-                my_dict[key] = q
+            if isinstance(cls, type):
+                query = self.__session.query(cls)
+                for q in query:
+                    key = "{}.{}".format(type(q).__name__, q.id)
+                    my_dict[key] = q
         else:
             class_list = [State, City, Place, Amenity, Review, User]
             for c in class_list:

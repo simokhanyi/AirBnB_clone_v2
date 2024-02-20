@@ -1,0 +1,25 @@
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route('/states_list')
+def states_list():
+    states = [
+        {"id": "421a55f4-7d82-47d9-b54c-a76916479545", "name": "Alabama"},
+        {"id": "421a55f4-7d82-47d9-b54c-a76916479546", "name": "Arizona"},
+        {"id": "421a55f4-7d82-47d9-b54c-a76916479547", "name": "California"},
+        {"id": "421a55f4-7d82-47d9-b54c-a76916479548", "name": "Colorado"},
+        {"id": "421a55f4-7d82-47d9-b54c-a76916479549", "name": "Florida"},
+        {"id": "421a55f4-7d82-47d9-b54c-a76916479550", "name": "Georgia"},
+        {"id": "421a55f4-7d82-47d9-b54c-a76916479551", "name": "Hawaii"},
+        {"id": "421a55f4-7d82-47d9-b54c-a76916479552", "name": "Illinois"},
+        {"id": "421a55f4-7d82-47d9-b54c-a76916479553", "name": "Indiana"},
+        {"id": "421a55f4-7d82-47d9-b54c-a76916479554", "name": "Louisiana"},
+        {"id": "421a55f4-7d82-47d9-b54c-a76916479555", "name": "Minnesota"},
+        {"id": "421a55f4-7d82-47d9-b54c-a76916479556", "name": "Mississippi"},
+        {"id": "421a55f4-7d82-47d9-b54c-a76916479557", "name": "Oregon"}
+    ]
+    return render_template('states_list.html', states=states)
+
+if __name__ == '__main__':
+    app.run(debug=True)

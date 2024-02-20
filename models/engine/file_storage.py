@@ -15,19 +15,19 @@ class FileStorage:
         Returns a dictionary of models currently in storage
 
         Args:
-            - cls (class, optional): the class to fetch from @__objects
+        - cls (class or str, optional): name of the class to fetch @__objects
+
         """
-        dicts = {}
-        if cls:
-            dictionary = self.__objects
-            for key in dictionary:
-                partition = key.replace('.', ' ')
-                partition = shlex.split(partition)
-                if (partition[0] == cls.__name__):
-                    dicts[key] = self.__objects[key]
-            return (dicts)
-        else:
+        if cls is None:
             return self.__objects
+
+        dicts = {}
+        class_name = cls if isinstance(cls, str) else cls.__name__
+        for key, obj in self.__objects.items():
+            obj_cls_name = key.split('.')[0]
+            if obj_cls_name == class_name:
+                dicts[key] = obj
+        return dicts
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
