@@ -19,6 +19,9 @@ class State(Base):
     name = Column(String(128), nullable=False)
 
 
-engine = create_engine('mysql+mysqldb://hbnb_dev:hbnb_dev_pwd@localhost/hbnb_dev_db', pool_pre_ping=True)
+engine = create_engine(
+    'mysql+mysqldb://hbnb_dev:hbnb_dev_pwd@localhost/hbnb_dev_db',
+    pool_pre_ping=True
+)
 Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
