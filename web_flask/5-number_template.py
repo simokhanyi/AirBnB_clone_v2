@@ -39,7 +39,7 @@ def number(n):
 @app.route('/number_template/<int:n>')
 def number_template(n):
     """Route to display a HTML page with the number."""
-    return render_template('5-number_template.html', n=n)
+    return render_template('5-number.html', n=n)
 
 # Running the Flask app
 if __name__ == '__main__':
